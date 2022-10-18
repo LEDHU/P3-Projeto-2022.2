@@ -1,9 +1,6 @@
 package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Tipos;
 
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Funcionario;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente.Paciente;
-
-import java.util.ArrayDeque;
 
 public class Recepcionista extends Funcionario {
 
