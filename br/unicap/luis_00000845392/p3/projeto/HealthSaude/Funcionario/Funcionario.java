@@ -2,11 +2,11 @@ package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario;
 
 public abstract class Funcionario implements Comparable <Funcionario> {
 
-    private String nome;
-    private String cpf;
-    private String telefone;
-    private String matricula;
-    private double salario;
+    protected String nome;
+    protected String cpf;
+    protected String telefone;
+    protected String matricula;
+    protected double salario;
 
     public Funcionario(String matricula) {
         this.matricula = matricula;
