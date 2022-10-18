@@ -10,7 +10,6 @@ public class Recepcionista extends Funcionario {
 
     public Recepcionista(String nome, String cpf, String telefone, String matricula) {
         super(nome, cpf, telefone, matricula);
-
     }
 
 
