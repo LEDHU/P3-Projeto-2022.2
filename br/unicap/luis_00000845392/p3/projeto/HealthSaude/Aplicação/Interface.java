@@ -5,9 +5,9 @@ import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialMe
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialRecepcionistaException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.PacienteNoFound;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Listas.*;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.ISADM;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.ISMedico;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.ISRecepcionista;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SADM;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SMedico;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SRecepcionista;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Tipos.*;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente.ListaDePaciente;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente.Paciente;
@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Interface {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
         Paciente paciente;
@@ -28,9 +28,9 @@ public class Interface {
         Medico medico;
         Recepcionista recepcionista;
 
-        ISADM isadm = new ISADM();
-        ISMedico isMedico = new ISMedico();
-        ISRecepcionista isRecepcionista = new ISRecepcionista();
+        SADM isadm = new SADM();
+        SMedico isMedico = new SMedico();
+        SRecepcionista isRecepcionista = new SRecepcionista();
 
         ListaDePaciente listaDePaciente = new ListaDePaciente();
         ListaDeFuncionario listaDeFuncionario = new ListaDeFuncionario();
