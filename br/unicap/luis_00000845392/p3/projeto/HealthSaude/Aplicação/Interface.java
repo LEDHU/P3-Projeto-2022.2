@@ -3,6 +3,7 @@ package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Aplicação;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialAdmException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialMedicoException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialRecepcionistaException;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.PacienteNoFound;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Listas.*;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.ISADM;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.ISMedico;
@@ -139,8 +140,9 @@ public class Interface {
                                                 int x = listaDeADM.buscarInt(adm);
 
                                                 if (x != -1) {
-                                                    listaDeFuncionario.deleteFuncionario(adm, x);
                                                     listaDeADM.deleteFuncionario(adm, x);
+                                                    x = listaDeFuncionario.buscarInt(adm);
+                                                    listaDeFuncionario.deleteFuncionario(adm, x);
                                                 } else
                                                     throw new CredencialAdmException();
 
@@ -149,8 +151,9 @@ public class Interface {
                                                 int x = listaDeMedico.buscarInt(medico);
 
                                                 if (x != -1) {
-                                                    listaDeFuncionario.deleteFuncionario(medico, x);
                                                     listaDeMedico.deleteFuncionario(medico, x);
+                                                    x = listaDeFuncionario.buscarInt(medico);
+                                                    listaDeFuncionario.deleteFuncionario(medico, x);
 
                                                 } else
                                                     throw new CredencialMedicoException();
@@ -160,8 +163,9 @@ public class Interface {
                                                 int x = listaDeRecepcionista.buscarInt(recepcionista);
 
                                                 if (x != -1) {
-                                                    listaDeFuncionario.deleteFuncionario(recepcionista, x);
                                                     listaDeRecepcionista.deleteFuncionario(recepcionista, x);
+                                                    x = listaDeFuncionario.buscarInt(recepcionista);
+                                                    listaDeFuncionario.deleteFuncionario(recepcionista, x);
                                                 } else
                                                     throw new CredencialRecepcionistaException();
                                             }
@@ -219,6 +223,9 @@ public class Interface {
                                                             } else
                                                                 throw new CredencialRecepcionistaException();
                                                         }
+                                                        case 0 ->{}
+
+                                                        default -> menuInvalido();
                                                     }
                                                 } catch (CredencialMedicoException credencialMedicoException) {
                                                     System.out.println("ERRO - Não exite credencial para Medico");
@@ -323,11 +330,22 @@ public class Interface {
 
                                         case 6 ->
                                             listaDeFuncionario.exibirLista();
+                                        case 0 ->{}
+                                        default -> menuInvalido();
 
                                     }
                                 }
                                 catch (InputMismatchException inputMismatchException){
                                     System.out.println("ERRO - Valor incorreto");
+                                }
+                                catch (CredencialMedicoException credencialMedicoException) {
+                                    System.out.println("ERRO - Não exite credencial para Medico");
+                                }
+                                catch (CredencialAdmException credencialAdmException) {
+                                    System.out.println("ERRO - Não exite credencial para Adm");
+                                }
+                                catch (CredencialRecepcionistaException credencialRecepcionistaException){
+                                    System.out.println("ERRO - Não exite credencial para Recepcionista");
                                 }
                             }
                         }
@@ -358,6 +376,8 @@ public class Interface {
 
                                         case 4 ->
                                             System.out.println(listaDeExame.getListaDeExames().getFirst());
+                                        case 0 ->{}
+                                        default -> menuInvalido();
 
                                     }
                                 }
@@ -410,9 +430,10 @@ public class Interface {
                                             if (c == 's') {
                                                 System.out.println("CPF: ");
                                                 cpf = in.nextLine();
-                                                paciente = new Paciente(cpf);
+                                                //leuson, em testes, o programa ignora a linha 432, por isso que tenho que ler o cpf duas vezes, so assim funciona
+                                                paciente = new Paciente(in.nextLine());
                                                 int x = listaDePaciente.buscarInt(paciente);
-                                                if (x != -1) {
+                                                if (x == -1) {
                                                     System.out.println("Paciente não incluido no sistema");
                                                 } else {
                                                     listaDePaciente.deletePaciente(paciente, x);
@@ -423,8 +444,8 @@ public class Interface {
                                             System.out.println("CPF: ");
                                             cpf = in.nextLine();
                                             paciente = new Paciente(cpf);
-                                            paciente = listaDePaciente.buscar(paciente);
-                                            if(paciente != null){
+                                            int x = listaDePaciente.buscarInt(paciente);
+                                            if(x != -1){
                                                 System.out.println("Nome: ");
                                                 nome = in.nextLine();
                                                 System.out.println("CPF: ");
@@ -438,12 +459,15 @@ public class Interface {
                                                 formatter = new SimpleDateFormat("dd/MM/yyyy");
                                                 nascimento = formatter.parse(nasc);
 
-                                                paciente.setNome(nome);
-                                                paciente.setCpf(cpf);
-                                                paciente.setEndereco(endereco);
-                                                paciente.setTelefone(telefone);
-                                                paciente.setNasc(nascimento);
+
+                                                listaDePaciente.getPacientes().get(x).setNome(nome);
+                                                listaDePaciente.getPacientes().get(x).setCpf(cpf);
+                                                listaDePaciente.getPacientes().get(x).setEndereco(endereco);
+                                                listaDePaciente.getPacientes().get(x).setTelefone(telefone);
+                                                listaDePaciente.getPacientes().get(x).setNasc(nascimento);
                                             }
+                                            else
+                                                throw new PacienteNoFound();
 
                                         }
                                         case 4 -> {
@@ -488,7 +512,8 @@ public class Interface {
                                         }
                                         case 8 ->
                                             listaDePaciente.exibirLista();
-
+                                        case 0 ->{}
+                                        default -> menuInvalido();
                                     }
                                 }
                                 catch (InputMismatchException inputMismatchException){
@@ -499,6 +524,8 @@ public class Interface {
                                 }
                                 catch (ParseException parseException) {
                                     System.out.println("ERRO - Data inserida incorretamente");
+                                } catch (PacienteNoFound e) {
+                                    System.out.println("ERRO - Paciente não encontrado");
                                 }
                             }
                         }

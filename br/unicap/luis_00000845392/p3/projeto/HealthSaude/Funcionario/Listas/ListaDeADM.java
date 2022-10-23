@@ -3,6 +3,7 @@ package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Listas;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Funcionario;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ListaDeADM {
     private ArrayList<Funcionario> adms;
@@ -49,8 +50,10 @@ public class ListaDeADM {
     }
 
     public void deleteFuncionario(Funcionario f, int i){
-        if(buscar(f) != null)
-            adms.remove(i);
+        if(!Objects.equals(f.getMatricula(), "M000")) {
+            if (buscar(f) != null)
+                adms.remove(i);
+        }
     }
 
     public void exibirLista(){
