@@ -3,7 +3,7 @@ package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Aplicação;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialAdmException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialMedicoException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialRecepcionistaException;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.PacienteNoFound;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.PacienteNoFoundException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Listas.*;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SADM;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SMedico;
@@ -467,7 +467,7 @@ public class Interface {
                                                 listaDePaciente.getPacientes().get(x).setNasc(nascimento);
                                             }
                                             else
-                                                throw new PacienteNoFound();
+                                                throw new PacienteNoFoundException();
 
                                         }
                                         case 4 -> {
@@ -524,7 +524,7 @@ public class Interface {
                                 }
                                 catch (ParseException parseException) {
                                     System.out.println("ERRO - Data inserida incorretamente");
-                                } catch (PacienteNoFound e) {
+                                } catch (PacienteNoFoundException e) {
                                     System.out.println("ERRO - Paciente não encontrado");
                                 }
                             }

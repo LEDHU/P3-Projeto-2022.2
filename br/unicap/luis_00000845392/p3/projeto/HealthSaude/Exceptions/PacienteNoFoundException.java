@@ -1,7 +1,7 @@
 package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions;
 
-public class PacienteNoFound extends Exception{
-    public PacienteNoFound(){
+public class PacienteNoFoundException extends Exception{
+    public PacienteNoFoundException(){
 
     }
 

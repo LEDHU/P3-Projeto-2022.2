@@ -5421,9 +5421,9 @@
 											"font": "Arial;13;1",
 											"left": 1581,
 											"top": 495,
-											"width": 110.50634765625,
+											"width": 172.630859375,
 											"height": 13,
-											"text": "PacienteNoFound"
+											"text": "PacienteNoFoundException"
 										},
 										{
 											"_type": "LabelView",
@@ -5456,7 +5456,7 @@
 									"font": "Arial;13;0",
 									"left": 1576,
 									"top": 488,
-									"width": 120.50634765625,
+									"width": 182.630859375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGEBs6AIsrW5yw="
@@ -5483,7 +5483,7 @@
 									"font": "Arial;13;0",
 									"left": 1576,
 									"top": 513,
-									"width": 120.50634765625,
+									"width": 182.630859375,
 									"height": 10
 								},
 								{
@@ -5498,7 +5498,7 @@
 									"font": "Arial;13;0",
 									"left": 1576,
 									"top": 523,
-									"width": 120.50634765625,
+									"width": 182.630859375,
 									"height": 10
 								},
 								{
@@ -5538,7 +5538,7 @@
 							"containerChangeable": true,
 							"left": 1576,
 							"top": 488,
-							"width": 120.50634765625,
+							"width": 182.630859375,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGEBs6AIsrVdVE="
@@ -10318,7 +10318,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PacienteNoFound"
+					"name": "PacienteNoFoundException"
 				},
 				{
 					"_type": "UMLClass",
@@ -10351,7 +10351,8 @@
 								"$ref": "AAAAAAGEBv7v0tXDun4="
 							},
 							"name": "listaDeConsultas",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -10388,7 +10389,8 @@
 								"$ref": "AAAAAAGEBv8q7te7Z9U="
 							},
 							"name": "listaDeExames",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
