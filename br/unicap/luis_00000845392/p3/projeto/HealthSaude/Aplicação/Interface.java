@@ -4,13 +4,12 @@ import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialAd
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialMedicoException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.CredencialRecepcionistaException;
 import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Exceptions.PacienteNoFoundException;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Listas.*;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SADM;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SMedico;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.SRecepcionista;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Tipos.*;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente.ListaDePaciente;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente.Paciente;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Enums.Cargos;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Enums.Exames;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Listas.*;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Tipos.*;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Paciente.ListaDePaciente;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Paciente.Paciente;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,23 +27,19 @@ public class Interface {
         Medico medico;
         Recepcionista recepcionista;
 
-        SADM isadm = new SADM();
-        SMedico isMedico = new SMedico();
-        SRecepcionista isRecepcionista = new SRecepcionista();
-
         ListaDePaciente listaDePaciente = new ListaDePaciente();
         ListaDeFuncionario listaDeFuncionario = new ListaDeFuncionario();
         ListaDeADM listaDeADM = new ListaDeADM();
         ListaDeMedico listaDeMedico = new ListaDeMedico();
         ListaDeRecepcionista listaDeRecepcionista = new ListaDeRecepcionista();
-        ListaDeConsulta listaDeConsulta = new ListaDeConsulta();
-        ListaDeExame listaDeExame = new ListaDeExame();
+        FilaDeConsulta filaDeConsulta = new FilaDeConsulta();
+        FilaDeExame filaDeExame = new FilaDeExame();
 
         int opcao0 = 1;
         int opcao1;
-        int opcao2;
 
         String matricula;
+        String matriAux;
         String nome;
         String cpf;
         String telefone;
@@ -72,10 +67,11 @@ public class Interface {
                 opcao0 = menuGeral();
 
                 switch (opcao0) {
+                    //ADMINISTRADOR
                     case 1 -> {
                         opcao1 = 1;
-                        opcao2 = 1;
                         matricula = menuMatri();
+                        matriAux = matricula;
                         adm = new ADM(matricula);
                         if (listaDeADM.buscar(adm) == null) {
                             throw new CredencialAdmException();
@@ -171,70 +167,21 @@ public class Interface {
                                             }
                                         }
                                         case 3 -> {
-                                            while (opcao2 != 0) {
-                                                double hora, valor;
-                                                try {
-                                                    opcao2 = menuSalario();
-                                                    if (opcao2 == 0)
-                                                        break;
-                                                    matricula = menuMatri();
-                                                    switch (opcao2) {
-                                                        case 1 -> {
-                                                            if (!listaDeADM.getAdms().isEmpty()) {
-                                                                adm = new ADM(matricula);
-                                                                int x = listaDeADM.buscarInt(adm);
-                                                                if (x != -1) {
-                                                                    System.out.println("Hora extra: ");
-                                                                    hora = in.nextDouble();
-                                                                    valor = isadm.calcularSalario(hora);
-                                                                    listaDeADM.getAdms().get(x).setSalario(valor);
-                                                                    System.out.println("O salario de " + listaDeADM.getAdms().get(x).getNome() + " é: " + valor);
-                                                                } else
-                                                                    throw new CredencialAdmException();
-                                                            } else
-                                                                System.out.println("Lista de administraçao esta vazia para calcular o salario");
-                                                        }
-                                                        case 2 -> {
-                                                            if (!listaDeMedico.getMedicos().isEmpty()) {
-                                                                medico = new Medico(matricula);
-                                                                int x = listaDeMedico.buscarInt(medico);
-                                                                if (x != -1) {
-                                                                    System.out.println("Hora extra: ");
-                                                                    hora = in.nextDouble();
-                                                                    valor = isMedico.calcularSalario(hora);
-                                                                    listaDeMedico.getMedicos().get(x).setSalario(valor);
-                                                                    System.out.println("O salario de " + listaDeMedico.getMedicos().get(x).getNome() + " é: " + valor);
-                                                                } else
-                                                                    throw new CredencialMedicoException();
-                                                            } else
-                                                                System.out.println("Lista de medico esta vazia para calcular o salario");
-                                                        }
-                                                        case 3 -> {
-                                                            if (!listaDeRecepcionista.getRecepcionistas().isEmpty()) {
-                                                                recepcionista = new Recepcionista(matricula);
-                                                                int x = listaDeRecepcionista.buscarInt(recepcionista);
-                                                                if (x != -1) {
-                                                                    System.out.println("Hora extra: ");
-                                                                    hora = in.nextDouble();
-                                                                    valor = isRecepcionista.calcularSalario(hora);
-                                                                    listaDeRecepcionista.getRecepcionistas().get(x).setSalario(valor);
-                                                                    System.out.println("O salario de " + listaDeRecepcionista.getRecepcionistas().get(x).getNome() + " é: " + valor);
-                                                                }
-                                                            } else
-                                                                throw new CredencialRecepcionistaException();
-                                                        }
-                                                        case 0 ->{}
+                                            double hora, valor;
+                                            if (!listaDeADM.getAdms().isEmpty()) {
+                                                adm = new ADM(matriAux);
+                                                int x = listaDeADM.buscarInt(adm);
+                                                if (x != -1) {
+                                                    System.out.println("Hora extra: ");
+                                                    hora = in.nextDouble();
+                                                    valor = adm.calcularSalario(hora);
+                                                    listaDeADM.getAdms().get(x).setSalario(valor);
+                                                    System.out.println("O salario de " + listaDeADM.getAdms().get(x).getNome() + " é: " + valor);
+                                                } else
+                                                    throw new CredencialAdmException();
+                                            } else
+                                                System.out.println("Lista de administraçao esta vazia para calcular o salario");
 
-                                                        default -> menuInvalido();
-                                                    }
-                                                } catch (CredencialMedicoException credencialMedicoException) {
-                                                    System.out.println("ERRO - Não exite credencial para Medico");
-                                                } catch (CredencialAdmException credencialAdmException) {
-                                                    System.out.println("ERRO - Não exite credencial para Adm");
-                                                } catch (CredencialRecepcionistaException credencialRecepcionistaException) {
-                                                    System.out.println("ERRO - Não exite credencial para Recepcionista");
-                                                }
-                                            }
                                         }
                                         case 4 -> {
                                             System.out.println("Cargo: ");
@@ -339,17 +286,18 @@ public class Interface {
                                     System.out.println("ERRO - Valor incorreto");
                                 }
                                 catch (CredencialMedicoException credencialMedicoException) {
-                                    System.out.println("ERRO - Não exite credencial para Medico");
+                                    System.out.println(credencialMedicoException.getMessage());
                                 }
                                 catch (CredencialAdmException credencialAdmException) {
-                                    System.out.println("ERRO - Não exite credencial para Adm");
+                                    System.out.println(credencialAdmException.getMessage());
                                 }
                                 catch (CredencialRecepcionistaException credencialRecepcionistaException){
-                                    System.out.println("ERRO - Não exite credencial para Recepcionista");
+                                    System.out.println(credencialRecepcionistaException.getMessage());
                                 }
                             }
                         }
                     }
+                    //MEDICO
                     case 2 -> {
                         opcao0 = 1;
                         opcao1 = 1;
@@ -363,19 +311,35 @@ public class Interface {
                                     opcao1 = menuMedico();
                                     switch (opcao1) {
                                         case 1 -> {
-                                            listaDeConsulta.deleteConsulta();
+                                            filaDeConsulta.deleteConsulta();
                                             System.out.println("O paciente foi atendido");
                                         }
                                         case 2 -> {
-                                            listaDeExame.deleteExame();
+                                            filaDeExame.deleteExame();
                                             System.out.println("O paciente foi atendido");
 
                                         }
                                         case 3 ->
-                                            System.out.println(listaDeConsulta.getListaDeConsultas().getFirst());
+                                            System.out.println(filaDeConsulta.getListaDeConsultas().getFirst());
 
                                         case 4 ->
-                                            System.out.println(listaDeExame.getListaDeExames().getFirst());
+                                            System.out.println(filaDeExame.getListaDeExames().getFirst());
+                                        case 5 ->{
+                                            double hora, valor;
+                                            if (!listaDeMedico.getMedicos().isEmpty()) {
+                                                medico = new Medico(matricula);
+                                                int x = listaDeMedico.buscarInt(medico);
+                                                if (x != -1) {
+                                                    System.out.println("Hora extra: ");
+                                                    hora = in.nextDouble();
+                                                    valor = medico.calcularSalario(hora);
+                                                    listaDeMedico.getMedicos().get(x).setSalario(valor);
+                                                    System.out.println("O salario de " + listaDeMedico.getMedicos().get(x).getNome() + " é: " + valor);
+                                                } else
+                                                    throw new CredencialMedicoException();
+                                            } else
+                                                System.out.println("Lista de medico esta vazia para calcular o salario");
+                                        }
                                         case 0 ->{}
                                         default -> menuInvalido();
 
@@ -390,6 +354,7 @@ public class Interface {
                             }
                         }
                     }
+                    //RECEPCIONISTA
                     case 3 -> {
                         opcao0 = 1;
                         opcao1 = 1;
@@ -433,11 +398,10 @@ public class Interface {
                                                 //leuson, em testes, o programa ignora a linha 432, por isso que tenho que ler o cpf duas vezes, so assim funciona
                                                 paciente = new Paciente(in.nextLine());
                                                 int x = listaDePaciente.buscarInt(paciente);
-                                                if (x == -1) {
+                                                if (x == -1)
                                                     System.out.println("Paciente não incluido no sistema");
-                                                } else {
+                                                else
                                                     listaDePaciente.deletePaciente(paciente, x);
-                                                }
                                             }
                                         }
                                         case 3 ->{
@@ -471,47 +435,86 @@ public class Interface {
 
                                         }
                                         case 4 -> {
-                                            System.out.println("Nome do paciente: ");
-                                            nome = in.nextLine();
                                             System.out.println("CPF do paciente: ");
                                             cpf = in.nextLine();
-                                            paciente = new Paciente(nome, cpf);
+                                            paciente = new Paciente(cpf);
+                                            paciente = listaDePaciente.buscar(paciente);
 
-                                            if (listaDePaciente.buscar(paciente) == null) {
+                                            if (listaDePaciente.buscar(paciente) == null)
                                                 System.out.println("Adicione o paciente antes de marcar uma consulta");
-                                            } else {
-                                                listaDeConsulta.addConsulta(paciente);
+                                            else {
+                                                filaDeConsulta.addConsulta(paciente);
                                                 System.out.println("Adicionado na fila para consulta");
                                             }
                                         }
                                         case 5 -> {
-                                            System.out.println("Nome do paciente: ");
-                                            nome = in.nextLine();
                                             System.out.println("CPF do paciente: ");
                                             cpf = in.nextLine();
-                                            paciente = new Paciente(nome, cpf);
 
-                                            if (listaDePaciente.buscar(paciente) == null) {
-                                                System.out.println("Adicione o paciente antes de marcar um exame");
-                                            } else {
-                                                listaDeExame.addExame(paciente);
-                                                System.out.println("Adicionado na fila para exames");
+                                            paciente = new Paciente(cpf);
+                                            paciente = listaDePaciente.buscar(paciente);
+                                            Exame exame;
+
+                                            if (listaDePaciente.buscar(paciente).getNome() != null){
+                                                menuExame();
+                                                try {
+                                                    opcao0 = in.nextInt();
+                                                    if (opcao0 == Exames.RaioX.exame) {
+                                                        exame = new Exame("Raio-X", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
+                                                        filaDeExame.addExame(exame);
+                                                        System.out.println("Adicionado na fila para exames");
+                                                    } else if (opcao0 == Exames.Sangue.exame) {
+                                                        exame = new Exame("de sangue", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
+                                                        filaDeExame.addExame(exame);
+                                                        System.out.println("Adicionado na fila para exames");
+                                                    } else if (opcao0 == Exames.tomografia.exame) {
+                                                        exame = new Exame("Tomografia", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
+                                                        filaDeExame.addExame(exame);
+                                                        System.out.println("Adicionado na fila para exames");
+                                                    }
+                                                }
+                                                catch (InputMismatchException inputMismatchException){
+                                                    System.out.println("ERRO - Valor incorreto");
+                                                }
+                                                catch (NumberFormatException numberFormatException){
+                                                    System.out.println("ERRO - O número não foi selecionado de forma correta");
+                                                }
                                             }
+                                            else
+                                                System.out.println("Adicione o paciente antes de marcar um exame");
                                         }
                                         case 6 -> {
-                                            if (!listaDeConsulta.getListaDeConsultas().isEmpty())
-                                                System.out.println(listaDeConsulta.getListaDeConsultas().getFirst());
+                                            if (!filaDeConsulta.getListaDeConsultas().isEmpty())
+                                                System.out.println(filaDeConsulta.getListaDeConsultas().getFirst().getNome()+ " " +
+                                                        filaDeConsulta.getListaDeConsultas().getFirst().getNasc());
                                             else
                                                 System.out.println("Lista de paciente para consulta esta vazia");
                                         }
                                         case 7 -> {
-                                            if (!listaDeExame.getListaDeExames().isEmpty())
-                                                System.out.println(listaDeExame.getListaDeExames().getFirst());
+                                            if (!filaDeExame.getListaDeExames().isEmpty())
+                                                System.out.println(filaDeExame.getListaDeExames().getFirst().getNome() + " " +
+                                                        filaDeExame.getListaDeExames().getFirst().getNasc() + " " +
+                                                        filaDeExame.getListaDeExames().getFirst().getTipo());
                                             else
                                                 System.out.println("Lista de paciente para exame esta vazia");
                                         }
                                         case 8 ->
                                             listaDePaciente.exibirLista();
+                                        case 9 ->{
+                                            double hora, valor;
+                                            if (!listaDeRecepcionista.getRecepcionistas().isEmpty()) {
+                                                recepcionista = new Recepcionista(matricula);
+                                                int x = listaDeRecepcionista.buscarInt(recepcionista);
+                                                if (x != -1) {
+                                                    System.out.println("Hora extra: ");
+                                                    hora = in.nextDouble();
+                                                    valor = recepcionista.calcularSalario(hora);
+                                                    listaDeRecepcionista.getRecepcionistas().get(x).setSalario(valor);
+                                                    System.out.println("O salario de " + listaDeRecepcionista.getRecepcionistas().get(x).getNome() + " é: " + valor);
+                                                }
+                                            } else
+                                                throw new CredencialRecepcionistaException();
+                                        }
                                         case 0 ->{}
                                         default -> menuInvalido();
                                     }
@@ -545,7 +548,7 @@ public class Interface {
                 System.out.println("ERRO - Não exite credencial para Medico");
             }
             catch (CredencialAdmException credencialAdmException) {
-                System.out.println("ERRO - Não exite credencial para Adm");
+                System.out.println("ERRO - Não exite credencial para Administrador");
             }
             catch (CredencialRecepcionistaException credencialRecepcionistaException){
                 System.out.println("ERRO - Não exite credencial para Recepcionista");
@@ -567,7 +570,7 @@ public class Interface {
 
         while(aux != 0) {
             System.out.println("\n=============================");
-            System.out.println("||  1 - Administração      ||");
+            System.out.println("||  1 - Administrador      ||");
             System.out.println("||  2 - Medico             ||");
             System.out.println("||  3 - Recepcionista      ||");
             System.out.println("||  0 - Sair do sistema    ||");
@@ -611,30 +614,6 @@ public class Interface {
         return result;
     }
 
-    public static int menuSalario(){
-        Scanner in = new Scanner(System.in);
-
-        int aux = 1;
-        int result = 10;
-
-        while(aux != 0){
-            System.out.println("\n====================================");
-            System.out.println("||  1 - Salario de Administração  ||");
-            System.out.println("||  2 - Salario de Medico         ||");
-            System.out.println("||  3 - Salario de Recepcionista  ||");
-            System.out.println("||  0 - Voltar                    ||");
-            System.out.println("====================================");
-            try{
-                result = in.nextInt();
-                aux = 0;
-            }
-            catch (NumberFormatException numberFormatException){
-                System.out.println("Numero invalido");
-            }
-        }
-        return result;
-    }
-
     public static int menuCargo(){
         Scanner in = new Scanner(System.in);
         int aux = 1;
@@ -642,7 +621,7 @@ public class Interface {
 
         while(aux != 0) {
             System.out.println("\n==============================");
-            System.out.println("||    1 - Administração     ||");
+            System.out.println("||    1 - Administrador    ||");
             System.out.println("||    2 - Medico            ||");
             System.out.println("||    3 - Recepcionista     ||");
             System.out.println("==============================");
@@ -671,6 +650,7 @@ public class Interface {
             System.out.println("||  2 - Exame finalizado                            ||");
             System.out.println("||  3 - Visualizar o proximo paciente para consulta ||");
             System.out.println("||  4 - Visualizar o proximo paciente para exame    ||");
+            System.out.println("||  5 - Calcular salario                            ||");
             System.out.println("||  0 - Voltar                                      ||");
             System.out.println("======================================================");
             try{
@@ -700,6 +680,7 @@ public class Interface {
             System.out.println("||  6 - Visualizar o proximo paciente para consulta ||");
             System.out.println("||  7 - Visualizar o proximo paciente para exame    ||");
             System.out.println("||  8 - Visualizar lista de paciente ja cadastrado  ||");
+            System.out.println("||  9 - Calcular salario                            ||");
             System.out.println("||  0 - Voltar                                      ||");
             System.out.println("======================================================");
             try{
@@ -724,5 +705,13 @@ public class Interface {
 
     public static void menuInvalido(){
         System.out.println("Opcao invalida");
+    }
+
+    public static void menuExame(){
+        System.out.println("\n=============================");
+        System.out.println("||    1 - Raio-X            ||");
+        System.out.println("||    2 - Exame de sangue   ||");
+        System.out.println("||    3 - Tomografia        ||");
+        System.out.println("==============================");
     }
 }

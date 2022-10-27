@@ -1,10 +1,9 @@
-package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario;
+package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Abstrato;
 
-public abstract class Funcionario implements Comparable <Funcionario> {
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Abstrato.Pessoa;
 
-    protected String nome;
-    protected String cpf;
-    protected String telefone;
+public abstract class Funcionario extends Pessoa implements Comparable <Funcionario> {
+
     protected String matricula;
     protected double salario;
 
@@ -17,34 +16,8 @@ public abstract class Funcionario implements Comparable <Funcionario> {
     }
 
     public Funcionario(String nome, String cpf, String telefone, String matricula) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefone = telefone;
+        super(nome, cpf, telefone);
         this.matricula = matricula;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getMatricula() {

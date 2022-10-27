@@ -1,45 +1,25 @@
-package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente;
+package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Paciente;
+
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Abstrato.Pessoa;
 
 import java.util.Date;
 
-public class Paciente implements Comparable <Paciente>{
-    private String nome;
-    private String cpf;
-    private String endereco;
-    private String telefone;
-    private Date nasc;
+public class Paciente extends Pessoa implements Comparable <Paciente>{
+
+    protected String endereco;
+    protected Date nasc;
 
     public Paciente(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public Paciente(String nome, String cpf){
-        this.cpf = cpf;
-        this.nome = nome;
+        super(cpf);
     }
 
     public Paciente(String nome, String cpf, String endereco, String telefone, Date nasc) {
-        this.nome = nome;
-        this.cpf = cpf;
+        super(nome, cpf, telefone);
         this.endereco = endereco;
-        this.telefone = telefone;
         this.nasc = nasc;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public Paciente() {
     }
 
     public String getEndereco() {
@@ -48,14 +28,6 @@ public class Paciente implements Comparable <Paciente>{
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public Date getNasc() {

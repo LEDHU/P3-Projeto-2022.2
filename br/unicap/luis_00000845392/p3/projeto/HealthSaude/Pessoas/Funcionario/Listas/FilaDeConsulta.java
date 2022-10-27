@@ -1,13 +1,13 @@
-package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Listas;
+package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Listas;
 
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente.Paciente;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Paciente.Paciente;
 
 import java.util.ArrayDeque;
 
-public class ListaDeConsulta {
+public class FilaDeConsulta {
     private ArrayDeque<Paciente> listaDeConsultas;
 
-    public ListaDeConsulta(){
+    public FilaDeConsulta(){
         this.listaDeConsultas = new ArrayDeque<>();
     }
 

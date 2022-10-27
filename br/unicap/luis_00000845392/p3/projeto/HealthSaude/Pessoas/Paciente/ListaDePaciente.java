@@ -1,6 +1,4 @@
-package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Paciente;
-
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Funcionario;
+package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Paciente;
 
 import java.util.ArrayList;
 
@@ -32,8 +30,10 @@ public class ListaDePaciente {
         if(!getPacientes().isEmpty()){
             int aux = 0;
             while(aux < pacientes.size()){
-                if(p.compareTo(pacientes.get(aux)) == 0)
+                if(p.compareTo(pacientes.get(aux)) == 0) {
+                    p = new Paciente(pacientes.get(aux).getNome(), pacientes.get(aux).getCpf(), pacientes.get(aux).getEndereco(), pacientes.get(aux).getTelefone(), pacientes.get(aux).getNasc());
                     return p;
+                }
                 aux++;
             }
         }

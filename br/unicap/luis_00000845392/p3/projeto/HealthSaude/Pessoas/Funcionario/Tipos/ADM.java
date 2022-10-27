@@ -1,7 +1,7 @@
-package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Tipos;
+package br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Tipos;
 
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Funcionario;
-import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Funcionario.Salario.ISalario;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Abstrato.Funcionario;
+import br.unicap.luis_00000845392.p3.projeto.HealthSaude.Pessoas.Funcionario.Salario.ISalario;
 
 public class ADM extends Funcionario implements ISalario {
 
@@ -15,6 +15,6 @@ public class ADM extends Funcionario implements ISalario {
 
     @Override
     public double calcularSalario(double extra) {
-        return 0;
+        return extra * 100 + 4000;
     }
 }
