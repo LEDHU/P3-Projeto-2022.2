@@ -7,6 +7,10 @@ import java.util.ArrayList;
 public class GerenciadorPaciente {
     private ListaDePaciente pacientes;
 
+    public GerenciadorPaciente() {
+
+    }
+
     public GerenciadorPaciente(ListaDePaciente pacientes) {
         this.pacientes = pacientes;
     }

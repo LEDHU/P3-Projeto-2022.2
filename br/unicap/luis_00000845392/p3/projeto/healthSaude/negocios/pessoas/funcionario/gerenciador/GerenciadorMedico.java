@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class GerenciadorMedico {
     private ListaDeMedico medicos;
 
+    public GerenciadorMedico() {
+
+    }
+
     public GerenciadorMedico(ListaDeMedico medicos) {
         this.medicos = medicos;
     }

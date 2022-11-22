@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class ListaDePaciente {
     private ArrayList<Paciente> pacientes;
 
-    public ListaDePaciente(ArrayList<Paciente> pacientes) {
-        this.pacientes = pacientes;
+    public ListaDePaciente() {
+        this.pacientes  = new ArrayList<>();
     }
 
     public ArrayList<Paciente> getPacientes() {

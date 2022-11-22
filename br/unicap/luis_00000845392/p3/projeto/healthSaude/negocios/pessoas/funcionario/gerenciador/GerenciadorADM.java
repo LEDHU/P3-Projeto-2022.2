@@ -8,6 +8,10 @@ import java.util.Objects;
 public class GerenciadorADM {
     private ListaDeADM adms;
 
+    public GerenciadorADM() {
+
+    }
+
     public GerenciadorADM(ListaDeADM adms) {
         this.adms = adms;
     }

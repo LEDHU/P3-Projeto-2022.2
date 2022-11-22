@@ -10,6 +10,10 @@ public class GerenciadorExame {
         this.filaDeExames = listaDeExames;
     }
 
+    public GerenciadorExame() {
+
+    }
+
     public FilaDeExame getListaDeExames() {
         return filaDeExames;
     }
