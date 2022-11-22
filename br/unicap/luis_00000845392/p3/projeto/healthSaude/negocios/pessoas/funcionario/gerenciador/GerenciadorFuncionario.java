@@ -12,6 +12,10 @@ public class GerenciadorFuncionario {
         this.funcionarios = funcionarios;
     }
 
+    public GerenciadorFuncionario() {
+
+    }
+
     public ListaDeFuncionario getFuncionarios() {
         return funcionarios;
     }

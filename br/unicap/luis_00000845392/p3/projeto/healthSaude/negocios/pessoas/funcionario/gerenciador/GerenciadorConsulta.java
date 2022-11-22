@@ -12,6 +12,10 @@ public class GerenciadorConsulta {
         this.filaDeConsultas = filaDeConsultas;
     }
 
+    public GerenciadorConsulta() {
+
+    }
+
     public FilaDeConsulta getFilaDeConsultas() {
         return filaDeConsultas;
     }

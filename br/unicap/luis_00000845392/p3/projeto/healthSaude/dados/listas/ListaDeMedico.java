@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class ListaDeMedico {
     private ArrayList<Funcionario> medicos;
 
-    public ListaDeMedico(ArrayList<Funcionario> medicos) {
-        this.medicos = medicos;
+    public ListaDeMedico() {
+        this.medicos = new ArrayList<>();;
     }
 
     public ArrayList<Funcionario> getMedicos() {

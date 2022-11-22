@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class GerenciadorRecepcionista {
     private ListaDeRecepcionista recepcionistas;
 
+    public GerenciadorRecepcionista() {
+
+    }
+
     public GerenciadorRecepcionista(ListaDeRecepcionista recepcionistas) {
         this.recepcionistas = recepcionistas;
     }
