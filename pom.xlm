@@ -37,6 +37,11 @@
         <spring.boot.versao>2.5.4</spring.boot.versao>
         <surefire.versao>2.22.2</surefire.versao>
         <findsecbugs-plugin.version>1.11.0</findsecbugs-plugin.version>
+
+        <properties>
+            <maven.compiler.source>11</maven.compiler.source>
+            <maven.compiler.target>11</maven.compiler.target>
+        </properties>
     </properties>
 
     <parent>
