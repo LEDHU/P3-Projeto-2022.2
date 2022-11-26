@@ -27,7 +27,8 @@ public class CalculaSalarioTest {
     @Test
     public void calculaSalarioMedicoTest(){
         String matricula = "M000";
-        Medico medico = new Medico(matricula);
+        Medico medico = Medico.getInstance(matricula);
+
 
         //Metodo Alvo
         double x = medico.calcularSalario(100);

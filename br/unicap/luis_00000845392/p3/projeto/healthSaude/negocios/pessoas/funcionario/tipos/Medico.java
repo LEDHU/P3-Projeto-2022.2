@@ -5,12 +5,28 @@ import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcio
 
 public class Medico extends Funcionario implements ISalario {
 
-    public Medico(String matricula) {
+    private static Medico instance;
+
+    private Medico(String matricula) {
         super(matricula);
     }
 
-    public Medico(String nome, String cpf, String telefone, String matricula) {
+    private Medico(String nome, String cpf, String telefone, String matricula) {
         super(nome, cpf, telefone, matricula);
+    }
+
+    public static Medico getInstance(String matricula){
+        if(instance == null){
+            instance = new Medico(matricula);
+        }
+        return instance;
+    }
+
+    public static Medico getInstance(String nome, String cpf, String telefone, String matricula){
+        if(instance == null){
+            instance = new Medico(nome, cpf, telefone, matricula);
+        }
+        return instance;
     }
 
     @Override

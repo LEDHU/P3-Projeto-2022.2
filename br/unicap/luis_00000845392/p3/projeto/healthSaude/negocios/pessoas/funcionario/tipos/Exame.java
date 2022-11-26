@@ -7,8 +7,8 @@ import java.util.Date;
 public class Exame extends Paciente {
     private String tipo;
 
-    public Exame (String tip, String nome, String cpf, String telefone, String endereço, Date nasc){
-        super(nome, cpf, telefone, endereço, nasc);
+    public Exame (String tip, String nome, String cpf, String telefone, String endereco, Date nasc){
+        super(nome, cpf, telefone, endereco, nasc);
         this.tipo = tip;
     }
 

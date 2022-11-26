@@ -98,7 +98,7 @@ public class Interface {
 
                                                 } else if (opcao1 == Cargos.Medico.Cargo) {
 
-                                                    medico = new Medico(nome, cpf, telefone, matricula);
+                                                    medico = Medico.getInstance(nome, cpf, telefone, matricula);
 
                                                     if (facadeNegocio.getGerenciadorFuncionario().buscar(medico) == null) {
                                                         facadeDados.getListaDeFuncionario().getFuncionarios().add(medico);
@@ -138,7 +138,7 @@ public class Interface {
                                                     throw new CredencialAdmException();
 
                                             } else if (opcao1 == Cargos.Medico.Cargo) {
-                                                medico = new Medico(matricula);
+                                                medico = Medico.getInstance(matricula);
 
                                                 int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
 
@@ -212,7 +212,7 @@ public class Interface {
                                                     throw new CredencialAdmException();
 
                                             } else if (opcao1 == Cargos.Medico.Cargo) {
-                                                medico = new Medico(matricula);
+                                                medico = Medico.getInstance(matricula);
                                                 int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
 
                                                 if (x != -1) {
@@ -300,7 +300,7 @@ public class Interface {
                         opcao0 = 1;
                         opcao1 = 1;
                         matricula = menuMatri();
-                        medico = new Medico(matricula);
+                        medico = Medico.getInstance(matricula);
 
                         if (facadeNegocio.getGerenciadorMedico().buscar(medico) == null) {
                            throw new CredencialMedicoException();
@@ -326,7 +326,7 @@ public class Interface {
                                         case 5 ->{
                                             double hora, valor;
                                             if (!facadeDados.getListaDeMedico().getMedicos().isEmpty()) {
-                                                medico = new Medico(matricula);
+                                                medico = Medico.getInstance(matricula);
                                                 int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
                                                 if (x != -1) {
                                                     System.out.println("Hora extra: ");
