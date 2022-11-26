@@ -1,4 +1,4 @@
-package br.unicap.luis_00000845392.p3.projeto.healthSaude.testsSalarios;
+package br.unicap.luis_00000845392.p3.projeto.healthSaude.tests;
 
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.tipos.ADM;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.tipos.Medico;
@@ -9,10 +9,10 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class CalculaSalario {
+public class CalculaSalarioTest {
 
     @Test
-    public void calculaSalarioAdm(){
+    public void calculaSalarioAdmTest(){
         //Fixture
         String matricula = "M000";
         ADM adm = new ADM(matricula);
@@ -25,7 +25,7 @@ public class CalculaSalario {
     }
 
     @Test
-    public void calculaSalarioMedico(){
+    public void calculaSalarioMedicoTest(){
         String matricula = "M000";
         Medico medico = new Medico(matricula);
 
@@ -37,7 +37,7 @@ public class CalculaSalario {
     }
 
     @Test
-    public void calculaSalarioRecepcionista(){
+    public void calculaSalarioRecepcionistaTest(){
         String matricula = "M000";
         Recepcionista recepcionista = new Recepcionista(matricula);
 
