@@ -2,7 +2,18 @@ package br.unicap.luis_00000845392.p3.projeto.healthSaude.dados;
 
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.listas.*;
 
+
 public class FacadeDados {
+    //instanciar apenas uma vez
+    private static FacadeDados uniqueInstance;
+
+    public static synchronized FacadeDados getInstance() {
+        if (uniqueInstance == null)
+            uniqueInstance = new FacadeDados();
+
+        return uniqueInstance;
+    }
+
     //Filas
     private FilaDeConsulta filaDeConsulta;
     private FilaDeExame filaDeExame;
@@ -14,18 +25,7 @@ public class FacadeDados {
     private ListaDePaciente listaDePaciente;
     private ListaDeRecepcionista listaDeRecepcionista;
 
-    //Construdores
-    public FacadeDados(FilaDeConsulta filaDeConsulta, FilaDeExame filaDeExame, ListaDeADM listaDeADM, ListaDeFuncionario listaDeFuncionario, ListaDeMedico listaDeMedico, ListaDePaciente listaDePaciente, ListaDeRecepcionista listaDeRecepcionista) {
-        this.filaDeConsulta = filaDeConsulta;
-        this.filaDeExame = filaDeExame;
-        this.listaDeADM = listaDeADM;
-        this.listaDeFuncionario = listaDeFuncionario;
-        this.listaDeMedico = listaDeMedico;
-        this.listaDePaciente = listaDePaciente;
-        this.listaDeRecepcionista = listaDeRecepcionista;
-    }
-
-    public FacadeDados() {
+    private FacadeDados() {
 
     }
 

@@ -19,8 +19,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Interface {
+    static Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
 
         Paciente paciente;
         ADM adm;
@@ -41,15 +41,13 @@ public class Interface {
 
         SimpleDateFormat formatter;
 
-        FacadeDados facadeDados = new FacadeDados();
-        FacadeNegocio facadeNegocio = new FacadeNegocio();
 
         //criacao de uma credencial funcionario principal
         //inical para adicionar os outros funcionarios
         matricula = "M000";
         adm = new ADM(matricula);
-        facadeDados.getListaDeFuncionario().getFuncionarios().add(adm);
-        facadeDados.getListaDeADM().getAdms().add(adm);
+        FacadeDados.getInstance().getListaDeFuncionario().getFuncionarios().add(adm);
+        FacadeDados.getInstance().getListaDeADM().getAdms().add(adm);
 
         //intencao de limpar a tela
         for(int i = 0; i < 50; i++){
@@ -68,7 +66,7 @@ public class Interface {
                         matricula = menuMatri();
                         matriAux = matricula;
                         adm = new ADM(matricula);
-                        if (facadeNegocio.getGerenciadorADM().buscar(adm) == null) {
+                        if (FacadeNegocio.getInstance().getGerenciadorADM().buscar(adm) == null) {
                             throw new CredencialAdmException();
                         } else {
                             while (opcao1 != 0) {
@@ -90,9 +88,9 @@ public class Interface {
 
                                                     adm = new ADM(nome, cpf, telefone, matricula);
 
-                                                    if (facadeNegocio.getGerenciadorFuncionario().buscar(adm) == null) {
-                                                        facadeDados.getListaDeFuncionario().getFuncionarios().add(adm);
-                                                        facadeDados.getListaDeADM().getAdms().add(adm);
+                                                    if (FacadeNegocio.getInstance().getGerenciadorFuncionario().buscar(adm) == null) {
+                                                        FacadeDados.getInstance().getListaDeFuncionario().getFuncionarios().add(adm);
+                                                        FacadeDados.getInstance().getListaDeADM().getAdms().add(adm);
                                                     } else
                                                         System.out.println("Funcionario ja cadastrado");
 
@@ -100,9 +98,9 @@ public class Interface {
 
                                                     medico = Medico.getInstance(nome, cpf, telefone, matricula);
 
-                                                    if (facadeNegocio.getGerenciadorFuncionario().buscar(medico) == null) {
-                                                        facadeDados.getListaDeFuncionario().getFuncionarios().add(medico);
-                                                        facadeDados.getListaDeMedico().getMedicos().add(medico);
+                                                    if (FacadeNegocio.getInstance().getGerenciadorFuncionario().buscar(medico) == null) {
+                                                        FacadeDados.getInstance().getListaDeFuncionario().getFuncionarios().add(medico);
+                                                        FacadeDados.getInstance().getListaDeMedico().getMedicos().add(medico);
                                                     } else
                                                         System.out.println("Funcionario ja cadastrado");
 
@@ -110,9 +108,9 @@ public class Interface {
 
                                                     recepcionista = new Recepcionista(nome, cpf, telefone, matricula);
 
-                                                    if (facadeNegocio.getGerenciadorFuncionario().buscar(recepcionista) == null) {
-                                                        facadeDados.getListaDeFuncionario().getFuncionarios().add(recepcionista);
-                                                        facadeDados.getListaDeRecepcionista().getRecepcionistas().add(recepcionista);
+                                                    if (FacadeNegocio.getInstance().getGerenciadorFuncionario().buscar(recepcionista) == null) {
+                                                        FacadeDados.getInstance().getListaDeFuncionario().getFuncionarios().add(recepcionista);
+                                                        FacadeDados.getInstance().getListaDeRecepcionista().getRecepcionistas().add(recepcionista);
                                                     } else
                                                         System.out.println("Funcionario ja cadastrado");
                                                 }
@@ -128,51 +126,51 @@ public class Interface {
                                             if (opcao1 == Cargos.ADM.Cargo) {
                                                 adm = new ADM(matricula);
 
-                                                int x = facadeNegocio.getGerenciadorADM().buscarInt(adm);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorADM().buscarInt(adm);
 
                                                 if (x != -1) {
-                                                    facadeNegocio.getGerenciadorADM().deleteFuncionario(adm, x);
-                                                    x = facadeNegocio.getGerenciadorFuncionario().buscarInt(adm);
-                                                    facadeNegocio.getGerenciadorFuncionario().deleteFuncionario(adm, x);
+                                                    FacadeNegocio.getInstance().getGerenciadorADM().deleteFuncionario(adm, x);
+                                                    x = FacadeNegocio.getInstance().getGerenciadorFuncionario().buscarInt(adm);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().deleteFuncionario(adm, x);
                                                 } else
                                                     throw new CredencialAdmException();
 
                                             } else if (opcao1 == Cargos.Medico.Cargo) {
                                                 medico = Medico.getInstance(matricula);
 
-                                                int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorMedico().buscarInt(medico);
 
                                                 if (x != -1) {
-                                                    facadeNegocio.getGerenciadorMedico().deleteFuncionario(medico, x);
-                                                    x = facadeNegocio.getGerenciadorFuncionario().buscarInt(medico);
-                                                    facadeNegocio.getGerenciadorFuncionario().deleteFuncionario(medico, x);
+                                                    FacadeNegocio.getInstance().getGerenciadorMedico().deleteFuncionario(medico, x);
+                                                    x = FacadeNegocio.getInstance().getGerenciadorFuncionario().buscarInt(medico);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().deleteFuncionario(medico, x);
                                                 } else
                                                     throw new CredencialMedicoException();
 
                                             } else if (opcao1 == Cargos.Recepcionista.Cargo) {
                                                 recepcionista = new Recepcionista(matricula);
 
-                                                int x = facadeNegocio.getGerenciadorRecepcionista().buscarInt(recepcionista);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorRecepcionista().buscarInt(recepcionista);
 
                                                 if (x != -1) {
-                                                    facadeNegocio.getGerenciadorRecepcionista().deleteFuncionario(recepcionista, x);
-                                                    x = facadeNegocio.getGerenciadorFuncionario().buscarInt(recepcionista);
-                                                    facadeNegocio.getGerenciadorFuncionario().deleteFuncionario(recepcionista, x);
+                                                    FacadeNegocio.getInstance().getGerenciadorRecepcionista().deleteFuncionario(recepcionista, x);
+                                                    x = FacadeNegocio.getInstance().getGerenciadorFuncionario().buscarInt(recepcionista);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().deleteFuncionario(recepcionista, x);
                                                 } else
                                                     throw new CredencialRecepcionistaException();
                                             }
                                         }
                                         case 3 -> {
                                             double hora, valor;
-                                            if (!facadeDados.getListaDeADM().getAdms().isEmpty()) {
+                                            if (!FacadeDados.getInstance().getListaDeADM().getAdms().isEmpty()) {
                                                 adm = new ADM(matriAux);
-                                                int x = facadeNegocio.getGerenciadorADM().buscarInt(adm);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorADM().buscarInt(adm);
                                                 if (x != -1) {
                                                     System.out.println("Hora extra: ");
                                                     hora = in.nextDouble();
                                                     valor = adm.calcularSalario(hora);
-                                                    facadeNegocio.getGerenciadorADM().getAdms().getAdms().get(x).setSalario(valor);
-                                                    System.out.println("O salario de " + facadeNegocio.getGerenciadorADM().getAdms().getAdms().get(x).getNome() + " é: " + valor);
+                                                    FacadeNegocio.getInstance().getGerenciadorADM().getAdms().getAdms().get(x).setSalario(valor);
+                                                    System.out.println("O salario de " + FacadeNegocio.getInstance().getGerenciadorADM().getAdms().getAdms().get(x).getNome() + " é: " + valor);
                                                 } else
                                                     throw new CredencialAdmException();
                                             } else
@@ -187,7 +185,7 @@ public class Interface {
                                             if (opcao1 == Cargos.ADM.Cargo) {
                                                 adm = new ADM(matricula);
 
-                                                int x = facadeNegocio.getGerenciadorADM().buscarInt(adm);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorADM().buscarInt(adm);
 
                                                 if (x != -1) {
                                                     System.out.println("Nome: ");
@@ -197,15 +195,15 @@ public class Interface {
                                                     System.out.println("Telefone: ");
                                                     telefone = in.nextLine();
 
-                                                    facadeNegocio.getGerenciadorADM().getAdms().getAdms().get(x).setNome(nome);
-                                                    facadeNegocio.getGerenciadorADM().getAdms().getAdms().get(x).setCpf(cpf);
-                                                    facadeNegocio.getGerenciadorADM().getAdms().getAdms().get(x).setTelefone(telefone);
+                                                    FacadeNegocio.getInstance().getGerenciadorADM().getAdms().getAdms().get(x).setNome(nome);
+                                                    FacadeNegocio.getInstance().getGerenciadorADM().getAdms().getAdms().get(x).setCpf(cpf);
+                                                    FacadeNegocio.getInstance().getGerenciadorADM().getAdms().getAdms().get(x).setTelefone(telefone);
 
-                                                    x = facadeNegocio.getGerenciadorFuncionario().buscarInt(adm);
+                                                    x = FacadeNegocio.getInstance().getGerenciadorFuncionario().buscarInt(adm);
 
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setNome(nome);
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setCpf(cpf);
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setTelefone(telefone);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setNome(nome);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setCpf(cpf);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setTelefone(telefone);
                                                     System.out.println("Atualizado");
                                                 }
                                                 else
@@ -213,7 +211,7 @@ public class Interface {
 
                                             } else if (opcao1 == Cargos.Medico.Cargo) {
                                                 medico = Medico.getInstance(matricula);
-                                                int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorMedico().buscarInt(medico);
 
                                                 if (x != -1) {
                                                     System.out.println("Nome: ");
@@ -223,15 +221,15 @@ public class Interface {
                                                     System.out.println("Telefone: ");
                                                     telefone = in.nextLine();
 
-                                                    facadeNegocio.getGerenciadorMedico().getMedicos().getMedicos().get(x).setNome(nome);
-                                                    facadeNegocio.getGerenciadorMedico().getMedicos().getMedicos().get(x).setCpf(cpf);
-                                                    facadeNegocio.getGerenciadorMedico().getMedicos().getMedicos().get(x).setTelefone(telefone);
+                                                    FacadeNegocio.getInstance().getGerenciadorMedico().getMedicos().getMedicos().get(x).setNome(nome);
+                                                    FacadeNegocio.getInstance().getGerenciadorMedico().getMedicos().getMedicos().get(x).setCpf(cpf);
+                                                    FacadeNegocio.getInstance().getGerenciadorMedico().getMedicos().getMedicos().get(x).setTelefone(telefone);
 
-                                                    x = facadeNegocio.getGerenciadorFuncionario().buscarInt(medico);
+                                                    x = FacadeNegocio.getInstance().getGerenciadorFuncionario().buscarInt(medico);
 
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setNome(nome);
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setCpf(cpf);
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setTelefone(telefone);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setNome(nome);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setCpf(cpf);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setTelefone(telefone);
                                                     System.out.println("Atualizado");
 
                                                 }
@@ -240,7 +238,7 @@ public class Interface {
 
                                             } else if (opcao1 == Cargos.Recepcionista.Cargo) {
                                                 recepcionista = new Recepcionista(matricula);
-                                                int x = facadeNegocio.getGerenciadorRecepcionista().buscarInt(recepcionista);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorRecepcionista().buscarInt(recepcionista);
 
                                                 if (x != -1) {
                                                     System.out.println("Nome: ");
@@ -250,15 +248,15 @@ public class Interface {
                                                     System.out.println("Telefone: ");
                                                     telefone = in.nextLine();
 
-                                                    facadeNegocio.getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setNome(nome);
-                                                    facadeNegocio.getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setCpf(cpf);
-                                                    facadeNegocio.getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setTelefone(telefone);
+                                                    FacadeNegocio.getInstance().getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setNome(nome);
+                                                    FacadeNegocio.getInstance().getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setCpf(cpf);
+                                                    FacadeNegocio.getInstance().getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setTelefone(telefone);
 
-                                                    x = facadeNegocio.getGerenciadorFuncionario().buscarInt(recepcionista);
+                                                    x = FacadeNegocio.getInstance().getGerenciadorFuncionario().buscarInt(recepcionista);
 
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setNome(nome);
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setCpf(cpf);
-                                                    facadeNegocio.getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setTelefone(telefone);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setNome(nome);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setCpf(cpf);
+                                                    FacadeNegocio.getInstance().getGerenciadorFuncionario().getFuncionarios().getFuncionarios().get(x).setTelefone(telefone);
                                                     System.out.println("Atualizado");
 
                                                 } else
@@ -269,11 +267,11 @@ public class Interface {
 
                                         case 5 -> {
                                             matricula = menuMatri();
-                                            facadeNegocio.getGerenciadorFuncionario().exibirFuncionario(matricula);
+                                            FacadeNegocio.getInstance().getGerenciadorFuncionario().exibirFuncionario(matricula);
                                         }
 
                                         case 6 ->
-                                            facadeNegocio.getGerenciadorFuncionario().exibirLista();
+                                            FacadeNegocio.getInstance().getGerenciadorFuncionario().exibirLista();
 
                                         case 0 ->{}
                                         default -> menuInvalido();
@@ -302,7 +300,7 @@ public class Interface {
                         matricula = menuMatri();
                         medico = Medico.getInstance(matricula);
 
-                        if (facadeNegocio.getGerenciadorMedico().buscar(medico) == null) {
+                        if (FacadeNegocio.getInstance().getGerenciadorMedico().buscar(medico) == null) {
                            throw new CredencialMedicoException();
                         } else {
                             while (opcao1 != 0) {
@@ -310,30 +308,30 @@ public class Interface {
                                     opcao1 = menuMedico();
                                     switch (opcao1) {
                                         case 1 -> {
-                                            facadeNegocio.getGerenciadorConsulta().deleteConsulta();
+                                            FacadeNegocio.getInstance().getGerenciadorConsulta().deleteConsulta();
                                             System.out.println("O paciente foi atendido");
                                         }
                                         case 2 -> {
-                                            facadeNegocio.getGerenciadorExame().deleteExame();
+                                            FacadeNegocio.getInstance().getGerenciadorExame().deleteExame();
                                             System.out.println("O paciente foi atendido");
 
                                         }
                                         case 3 ->
-                                            System.out.println(facadeDados.getFilaDeConsulta().getFilaConsulta().getFirst());
+                                            System.out.println(FacadeDados.getInstance().getFilaDeConsulta().getFilaConsulta().getFirst());
 
                                         case 4 ->
-                                            System.out.println(facadeDados.getFilaDeExame().getFilaExames().getFirst());
+                                            System.out.println(FacadeDados.getInstance().getFilaDeExame().getFilaExames().getFirst());
                                         case 5 ->{
                                             double hora, valor;
-                                            if (!facadeDados.getListaDeMedico().getMedicos().isEmpty()) {
+                                            if (!FacadeDados.getInstance().getListaDeMedico().getMedicos().isEmpty()) {
                                                 medico = Medico.getInstance(matricula);
-                                                int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorMedico().buscarInt(medico);
                                                 if (x != -1) {
                                                     System.out.println("Hora extra: ");
                                                     hora = in.nextDouble();
                                                     valor = medico.calcularSalario(hora);
-                                                    facadeNegocio.getGerenciadorMedico().getMedicos().getMedicos().get(x).setSalario(valor);
-                                                    System.out.println("O salario de " + facadeNegocio.getGerenciadorMedico().getMedicos().getMedicos().get(x).getNome() + " é: " + valor);
+                                                    FacadeNegocio.getInstance().getGerenciadorMedico().getMedicos().getMedicos().get(x).setSalario(valor);
+                                                    System.out.println("O salario de " + FacadeNegocio.getInstance().getGerenciadorMedico().getMedicos().getMedicos().get(x).getNome() + " é: " + valor);
                                                 } else
                                                     throw new CredencialMedicoException();
                                             } else
@@ -359,7 +357,7 @@ public class Interface {
                         opcao1 = 1;
                         matricula = menuMatri();
                         recepcionista = new Recepcionista(matricula);
-                        if (facadeNegocio.getGerenciadorRecepcionista().buscar(recepcionista) == null) {
+                        if (FacadeNegocio.getInstance().getGerenciadorRecepcionista().buscar(recepcionista) == null) {
                             throw new CredencialRecepcionistaException();
                         }
                         else {
@@ -383,8 +381,8 @@ public class Interface {
 
                                             paciente = new Paciente(nome, cpf, endereco, telefone, nascimento);
 
-                                            if (facadeNegocio.getGerenciadorPaciente().buscar(paciente) == null) {
-                                                facadeDados.getListaDePaciente().getPacientes().add(paciente);
+                                            if (FacadeNegocio.getInstance().getGerenciadorPaciente().buscar(paciente) == null) {
+                                                FacadeDados.getInstance().getListaDePaciente().getPacientes().add(paciente);
                                             }
                                         }
                                         case 2 -> {
@@ -395,18 +393,18 @@ public class Interface {
                                                 System.out.println("CPF: ");
                                                 cpf = in.nextLine();
                                                 paciente = new Paciente(cpf);
-                                                int x = facadeNegocio.getGerenciadorPaciente().buscarInt(paciente);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorPaciente().buscarInt(paciente);
                                                 if (x == -1)
                                                     System.out.println("Paciente não incluido no sistema");
                                                 else
-                                                    facadeNegocio.getGerenciadorPaciente().deletePaciente(paciente, x);
+                                                    FacadeNegocio.getInstance().getGerenciadorPaciente().deletePaciente(paciente, x);
                                             }
                                         }
                                         case 3 ->{
                                             System.out.println("CPF: ");
                                             cpf = in.nextLine();
                                             paciente = new Paciente(cpf);
-                                            int x = facadeNegocio.getGerenciadorPaciente().buscarInt(paciente);
+                                            int x = FacadeNegocio.getInstance().getGerenciadorPaciente().buscarInt(paciente);
                                             if(x != -1){
                                                 System.out.println("Nome: ");
                                                 nome = in.nextLine();
@@ -421,11 +419,11 @@ public class Interface {
                                                 formatter = new SimpleDateFormat("dd/MM/yyyy");
                                                 nascimento = formatter.parse(nasc);
 
-                                                facadeNegocio.getGerenciadorPaciente().getPacientes().getPacientes().get(x).setNome(nome);
-                                                facadeNegocio.getGerenciadorPaciente().getPacientes().getPacientes().get(x).setCpf(cpf);
-                                                facadeNegocio.getGerenciadorPaciente().getPacientes().getPacientes().get(x).setEndereco(endereco);
-                                                facadeNegocio.getGerenciadorPaciente().getPacientes().getPacientes().get(x).setTelefone(telefone);
-                                                facadeNegocio.getGerenciadorPaciente().getPacientes().getPacientes().get(x).setNasc(nascimento);
+                                                FacadeNegocio.getInstance().getGerenciadorPaciente().getPacientes().getPacientes().get(x).setNome(nome);
+                                                FacadeNegocio.getInstance().getGerenciadorPaciente().getPacientes().getPacientes().get(x).setCpf(cpf);
+                                                FacadeNegocio.getInstance().getGerenciadorPaciente().getPacientes().getPacientes().get(x).setEndereco(endereco);
+                                                FacadeNegocio.getInstance().getGerenciadorPaciente().getPacientes().getPacientes().get(x).setTelefone(telefone);
+                                                FacadeNegocio.getInstance().getGerenciadorPaciente().getPacientes().getPacientes().get(x).setNasc(nascimento);
                                             }
                                             else
                                                 throw new PacienteNoFoundException();
@@ -436,10 +434,10 @@ public class Interface {
                                             cpf = in.nextLine();
                                             paciente = new Paciente(cpf);
 
-                                            if (facadeNegocio.getGerenciadorPaciente().buscar(paciente) == null)
+                                            if (FacadeNegocio.getInstance().getGerenciadorPaciente().buscar(paciente) == null)
                                                 System.out.println("Adicione o paciente antes de marcar uma consulta");
                                             else {
-                                                facadeDados.getFilaDeConsulta().getFilaConsulta().add(paciente);
+                                                FacadeDados.getInstance().getFilaDeConsulta().getFilaConsulta().add(paciente);
                                                 System.out.println("Adicionado na fila para consulta");
                                             }
                                         }
@@ -448,7 +446,7 @@ public class Interface {
                                             cpf = in.nextLine();
 
                                             paciente = new Paciente(cpf);
-                                            paciente = facadeNegocio.getGerenciadorPaciente().buscar(paciente);
+                                            paciente = FacadeNegocio.getInstance().getGerenciadorPaciente().buscar(paciente);
                                             Exame exame;
 
                                             if (paciente != null){
@@ -457,15 +455,15 @@ public class Interface {
                                                     opcao0 = in.nextInt();
                                                     if (opcao0 == Exames.RaioX.exame) {
                                                         exame = new Exame("Raio-X", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
-                                                        facadeDados.getFilaDeExame().getFilaExames().add(exame);
+                                                        FacadeDados.getInstance().getFilaDeExame().getFilaExames().add(exame);
                                                         System.out.println("Adicionado na fila para exames");
                                                     } else if (opcao0 == Exames.Sangue.exame) {
                                                         exame = new Exame("de sangue", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
-                                                        facadeDados.getFilaDeExame().getFilaExames().add(exame);
+                                                        FacadeDados.getInstance().getFilaDeExame().getFilaExames().add(exame);
                                                         System.out.println("Adicionado na fila para exames");
                                                     } else if (opcao0 == Exames.tomografia.exame) {
                                                         exame = new Exame("Tomografia", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
-                                                        facadeDados.getFilaDeExame().getFilaExames().add(exame);
+                                                        FacadeDados.getInstance().getFilaDeExame().getFilaExames().add(exame);
                                                         System.out.println("Adicionado na fila para exames");
                                                     }
                                                 }
@@ -480,33 +478,33 @@ public class Interface {
                                                 System.out.println("Adicione o paciente antes de marcar um exame");
                                         }
                                         case 6 -> {
-                                            if (!facadeDados.getFilaDeConsulta().getFilaConsulta().isEmpty())
-                                                System.out.println(facadeDados.getFilaDeConsulta().getFilaConsulta().getFirst().getNome()+ " " +
-                                                        facadeDados.getFilaDeConsulta().getFilaConsulta().getFirst().getNasc());
+                                            if (!FacadeDados.getInstance().getFilaDeConsulta().getFilaConsulta().isEmpty())
+                                                System.out.println(FacadeDados.getInstance().getFilaDeConsulta().getFilaConsulta().getFirst().getNome()+ " " +
+                                                        FacadeDados.getInstance().getFilaDeConsulta().getFilaConsulta().getFirst().getNasc());
                                             else
                                                 System.out.println("Lista de paciente para consulta esta vazia");
                                         }
                                         case 7 -> {
-                                            if (!facadeDados.getFilaDeExame().getFilaExames().isEmpty())
-                                                System.out.println(facadeDados.getFilaDeExame().getFilaExames().getFirst().getNome() + " " +
-                                                        facadeDados.getFilaDeExame().getFilaExames().getFirst().getNasc() + " " +
-                                                        facadeDados.getFilaDeExame().getFilaExames().getFirst().getTipo());
+                                            if (!FacadeDados.getInstance().getFilaDeExame().getFilaExames().isEmpty())
+                                                System.out.println(FacadeDados.getInstance().getFilaDeExame().getFilaExames().getFirst().getNome() + " " +
+                                                        FacadeDados.getInstance().getFilaDeExame().getFilaExames().getFirst().getNasc() + " " +
+                                                        FacadeDados.getInstance().getFilaDeExame().getFilaExames().getFirst().getTipo());
                                             else
                                                 System.out.println("Lista de paciente para exame esta vazia");
                                         }
                                         case 8 ->
-                                            facadeNegocio.getGerenciadorPaciente().exibirLista();
+                                            FacadeNegocio.getInstance().getGerenciadorPaciente().exibirLista();
                                         case 9 ->{
                                             double hora, valor;
-                                            if (!facadeDados.getListaDeRecepcionista().getRecepcionistas().isEmpty()) {
+                                            if (!FacadeDados.getInstance().getListaDeRecepcionista().getRecepcionistas().isEmpty()) {
                                                 recepcionista = new Recepcionista(matricula);
-                                                int x = facadeNegocio.getGerenciadorRecepcionista().buscarInt(recepcionista);
+                                                int x = FacadeNegocio.getInstance().getGerenciadorRecepcionista().buscarInt(recepcionista);
                                                 if (x != -1) {
                                                     System.out.println("Hora extra: ");
                                                     hora = in.nextDouble();
                                                     valor = recepcionista.calcularSalario(hora);
-                                                    facadeNegocio.getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setSalario(valor);
-                                                    System.out.println("O salario de " + facadeNegocio.getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).getNome() + " é: " + valor);
+                                                    FacadeNegocio.getInstance().getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).setSalario(valor);
+                                                    System.out.println("O salario de " + FacadeNegocio.getInstance().getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().get(x).getNome() + " é: " + valor);
                                                 }
                                             } else
                                                 throw new CredencialRecepcionistaException();
@@ -541,13 +539,13 @@ public class Interface {
                 System.out.println("ERRO - O número não foi selecionado de forma correta");
             }
             catch (CredencialMedicoException credencialMedicoException) {
-                System.out.println("ERRO - Não exite credencial para Medico");
+                System.out.println("ERRO - Não existe credencial para Medico");
             }
             catch (CredencialAdmException credencialAdmException) {
-                System.out.println("ERRO - Não exite credencial para Administrador");
+                System.out.println("ERRO - Não existe credencial para Administrador");
             }
             catch (CredencialRecepcionistaException credencialRecepcionistaException){
-                System.out.println("ERRO - Não exite credencial para Recepcionista");
+                System.out.println("ERRO - Não existe credencial para Recepcionista");
             }
             catch (InputMismatchException inputMismatchException){
                 System.out.println("ERRO - Valor incorreto");
@@ -560,7 +558,6 @@ public class Interface {
 
     //menu inicial
     public static int menuGeral(){
-        Scanner in = new Scanner(System.in);
         int aux = 1;
         int result = 10;
 
@@ -584,7 +581,6 @@ public class Interface {
 
     //Administraçao
     public static int menuADM(){
-        Scanner in = new Scanner(System.in);
 
         int aux = 1;
         int result = 10;
@@ -611,7 +607,6 @@ public class Interface {
     }
 
     public static int menuCargo(){
-        Scanner in = new Scanner(System.in);
         int aux = 1;
         int result = 10;
 
@@ -635,7 +630,6 @@ public class Interface {
 
     //Medico
     public static int menuMedico(){
-        Scanner in = new Scanner(System.in);
 
         int aux = 1;
         int result = 10;
@@ -662,7 +656,6 @@ public class Interface {
 
     //recepcionista
     public static int menuRecepcionista(){
-        Scanner in = new Scanner(System.in);
         int aux = 1;
         int result = 10;
 
@@ -692,7 +685,6 @@ public class Interface {
 
     // auxiliares
     public static String menuMatri(){
-        Scanner in = new Scanner(System.in);
 
         System.out.println("Matricula: ");
 

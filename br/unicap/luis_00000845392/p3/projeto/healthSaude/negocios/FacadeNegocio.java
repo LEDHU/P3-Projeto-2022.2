@@ -6,6 +6,16 @@ import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.pacien
 
 public class FacadeNegocio {
 
+    //instanciar apenas uma vez
+    private static FacadeNegocio uniqueInstance;
+
+    public static synchronized FacadeNegocio getInstance() {
+        if (uniqueInstance == null)
+            uniqueInstance = new FacadeNegocio();
+
+        return uniqueInstance;
+    }
+
     //Gerenciadores
     private GerenciadorADM gerenciadorADM;
     private GerenciadorConsulta gerenciadorConsulta;
@@ -16,8 +26,8 @@ public class FacadeNegocio {
     private GerenciadorPaciente gerenciadorPaciente;
 
 
-    //Construdore
-    public FacadeNegocio() {
+    //Construtor
+    private FacadeNegocio() {
 
     }
 

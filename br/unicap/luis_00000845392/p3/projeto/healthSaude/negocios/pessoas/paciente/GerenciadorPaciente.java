@@ -2,7 +2,6 @@ package br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.pacie
 
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.listas.ListaDePaciente;
 
-import java.util.ArrayList;
 
 public class GerenciadorPaciente {
     private ListaDePaciente pacientes;

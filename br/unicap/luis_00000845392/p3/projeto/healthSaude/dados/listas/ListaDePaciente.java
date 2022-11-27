@@ -1,6 +1,6 @@
 package br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.listas;
 
-import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.abstrato.Funcionario;
+
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.paciente.Paciente;
 
 import java.util.ArrayList;

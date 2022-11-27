@@ -3,7 +3,6 @@ package br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funci
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.listas.FilaDeConsulta;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.paciente.Paciente;
 
-import java.util.ArrayDeque;
 
 public class GerenciadorConsulta {
     private FilaDeConsulta filaDeConsultas;

@@ -3,7 +3,6 @@ package br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funci
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.listas.ListaDeMedico;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.abstrato.Funcionario;
 
-import java.util.ArrayList;
 
 public class GerenciadorMedico {
     private ListaDeMedico medicos;
