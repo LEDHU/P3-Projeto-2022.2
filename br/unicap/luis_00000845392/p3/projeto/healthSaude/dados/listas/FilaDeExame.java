@@ -11,6 +11,10 @@ public class FilaDeExame {
         this.filaExames = filaExames;
     }
 
+    public FilaDeExame() {
+        filaExames = new ArrayDeque<>();
+    }
+
     public ArrayDeque<Exame> getFilaExames() {
         return filaExames;
     }

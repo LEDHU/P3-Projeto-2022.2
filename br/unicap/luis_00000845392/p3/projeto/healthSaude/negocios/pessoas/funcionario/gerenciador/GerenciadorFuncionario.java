@@ -13,7 +13,7 @@ public class GerenciadorFuncionario {
     }
 
     public GerenciadorFuncionario() {
-
+        funcionarios = new ListaDeFuncionario();
     }
 
     public ListaDeFuncionario getFuncionarios() {
@@ -25,11 +25,11 @@ public class GerenciadorFuncionario {
     }
 
     public void addFuncionario(Funcionario f){
-        if (buscar(f) == null) {
-            funcionarios.getFuncionarios().add(f);
+        //if (buscar(f) == null) {
+            funcionarios.add(f);
             System.out.println("Funcionario adicionado ao sistema");
-        } else
-            System.out.println("Funcionario ja cadastrado no sistema");
+        //} else
+            //System.out.println("Funcionario ja cadastrado no sistema");
 
     }
     public Funcionario buscar(Funcionario f){

@@ -15,10 +15,15 @@ public class FacadeNegocio {
     private GerenciadorRecepcionista gerenciadorRecepcionista;
     private GerenciadorPaciente gerenciadorPaciente;
 
-
-    //Construdore
-    public FacadeNegocio() {
-
+    //Construdor
+    public FacadeNegocio(GerenciadorADM gerenciadorADM, GerenciadorConsulta gerenciadorConsulta, GerenciadorExame gerenciadorExame, GerenciadorFuncionario gerenciadorFuncionario, GerenciadorMedico gerenciadorMedico, GerenciadorRecepcionista gerenciadorRecepcionista, GerenciadorPaciente gerenciadorPaciente) {
+        this.gerenciadorADM = gerenciadorADM;
+        this.gerenciadorConsulta = gerenciadorConsulta;
+        this.gerenciadorExame = gerenciadorExame;
+        this.gerenciadorFuncionario = gerenciadorFuncionario;
+        this.gerenciadorMedico = gerenciadorMedico;
+        this.gerenciadorRecepcionista = gerenciadorRecepcionista;
+        this.gerenciadorPaciente = gerenciadorPaciente;
     }
 
     //Getters e Setters

@@ -2,6 +2,7 @@ package br.unicap.luis_00000845392.p3.projeto.healthSaude.ui;
 
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.FacadeDados;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.FacadeNegocio;
+import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.gerenciador.*;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.exceptions.CredencialAdmException;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.exceptions.CredencialMedicoException;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.exceptions.CredencialRecepcionistaException;
@@ -9,6 +10,7 @@ import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.exceptions.Pac
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.enums.Cargos;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.enums.Exames;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.tipos.*;
+import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.paciente.GerenciadorPaciente;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.paciente.Paciente;
 
 import java.text.ParseException;
@@ -27,6 +29,14 @@ public class Interface {
         Medico medico;
         Recepcionista recepcionista;
 
+        GerenciadorConsulta gerenciadorConsulta = new GerenciadorConsulta();
+        GerenciadorExame gerenciadorExame = new GerenciadorExame();
+        GerenciadorFuncionario gerenciadorFuncionario = new GerenciadorFuncionario();
+        GerenciadorRecepcionista gerenciadorRecepcionista = new GerenciadorRecepcionista();
+        GerenciadorADM gerenciadorADM = new GerenciadorADM();
+        GerenciadorMedico gerenciadorMedico = new GerenciadorMedico();
+        GerenciadorPaciente gerenciadorPaciente = new GerenciadorPaciente();
+
         int opcao0 = 1;
         int opcao1;
 
@@ -41,15 +51,16 @@ public class Interface {
 
         SimpleDateFormat formatter;
 
-        FacadeDados facadeDados = new FacadeDados();
-        FacadeNegocio facadeNegocio = new FacadeNegocio();
-
+        FacadeNegocio facadeNegocio = new FacadeNegocio(gerenciadorADM, gerenciadorConsulta, gerenciadorExame, gerenciadorFuncionario, gerenciadorMedico,gerenciadorRecepcionista,gerenciadorPaciente);
+        FacadeDados facadeDados = new FacadeDados(gerenciadorConsulta, gerenciadorExame, gerenciadorADM ,gerenciadorFuncionario, gerenciadorMedico, gerenciadorPaciente, gerenciadorRecepcionista);
         //criacao de uma credencial funcionario principal
         //inical para adicionar os outros funcionarios
         matricula = "M000";
         adm = new ADM(matricula);
-        facadeDados.getListaDeFuncionario().getFuncionarios().add(adm);
-        facadeDados.getListaDeADM().getAdms().add(adm);
+        //gerenciadorFuncionario.addFuncionario(adm);
+        //gerenciadorADM.addFuncionario(adm);
+        facadeDados.getGerenciadorFuncionario().addFuncionario(adm);
+        facadeDados.getGerenciadorADM().addFuncionario(adm);
 
         //intencao de limpar a tela
         for(int i = 0; i < 50; i++){
@@ -91,8 +102,10 @@ public class Interface {
                                                     adm = new ADM(nome, cpf, telefone, matricula);
 
                                                     if (facadeNegocio.getGerenciadorFuncionario().buscar(adm) == null) {
-                                                        facadeDados.getListaDeFuncionario().getFuncionarios().add(adm);
-                                                        facadeDados.getListaDeADM().getAdms().add(adm);
+                                                        //gerenciadorFuncionario.addFuncionario(adm);
+                                                        //gerenciadorADM.addFuncionario(adm);
+                                                        facadeDados.getGerenciadorFuncionario().addFuncionario(adm);
+                                                        facadeDados.getGerenciadorADM().addFuncionario(adm);
                                                     } else
                                                         System.out.println("Funcionario ja cadastrado");
 
@@ -101,8 +114,10 @@ public class Interface {
                                                     medico = Medico.getInstance(nome, cpf, telefone, matricula);
 
                                                     if (facadeNegocio.getGerenciadorFuncionario().buscar(medico) == null) {
-                                                        facadeDados.getListaDeFuncionario().getFuncionarios().add(medico);
-                                                        facadeDados.getListaDeMedico().getMedicos().add(medico);
+                                                        //gerenciadorFuncionario.addFuncionario(medico);
+                                                        //gerenciadorMedico.addFuncionario(medico);
+                                                        facadeDados.getGerenciadorFuncionario().addFuncionario(medico);
+                                                        facadeDados.getGerenciadorMedico().addFuncionario(medico);
                                                     } else
                                                         System.out.println("Funcionario ja cadastrado");
 
@@ -111,8 +126,10 @@ public class Interface {
                                                     recepcionista = new Recepcionista(nome, cpf, telefone, matricula);
 
                                                     if (facadeNegocio.getGerenciadorFuncionario().buscar(recepcionista) == null) {
-                                                        facadeDados.getListaDeFuncionario().getFuncionarios().add(recepcionista);
-                                                        facadeDados.getListaDeRecepcionista().getRecepcionistas().add(recepcionista);
+                                                        //gerenciadorFuncionario.addFuncionario(recepcionista);
+                                                        //gerenciadorRecepcionista.addFuncionario(recepcionista);
+                                                        facadeDados.getGerenciadorFuncionario().addFuncionario(recepcionista);
+                                                        facadeDados.getGerenciadorRecepcionista().addFuncionario(recepcionista);
                                                     } else
                                                         System.out.println("Funcionario ja cadastrado");
                                                 }
@@ -164,7 +181,7 @@ public class Interface {
                                         }
                                         case 3 -> {
                                             double hora, valor;
-                                            if (!facadeDados.getListaDeADM().getAdms().isEmpty()) {
+                                            if (!facadeDados.getGerenciadorADM().getAdms().getAdms().isEmpty()) {
                                                 adm = new ADM(matriAux);
                                                 int x = facadeNegocio.getGerenciadorADM().buscarInt(adm);
                                                 if (x != -1) {
@@ -319,13 +336,13 @@ public class Interface {
 
                                         }
                                         case 3 ->
-                                            System.out.println(facadeDados.getFilaDeConsulta().getFilaConsulta().getFirst());
+                                            System.out.println(facadeDados.getGerenciadorConsulta().getFilaDeConsultas().getFilaConsulta().getFirst());
 
                                         case 4 ->
-                                            System.out.println(facadeDados.getFilaDeExame().getFilaExames().getFirst());
+                                            System.out.println(facadeDados.getGerenciadorExame().getFilaDeExames().getFilaExames().getFirst());
                                         case 5 ->{
                                             double hora, valor;
-                                            if (!facadeDados.getListaDeMedico().getMedicos().isEmpty()) {
+                                            if (!facadeDados.getGerenciadorMedico().getMedicos().getMedicos().isEmpty()) {
                                                 medico = Medico.getInstance(matricula);
                                                 int x = facadeNegocio.getGerenciadorMedico().buscarInt(medico);
                                                 if (x != -1) {
@@ -384,7 +401,7 @@ public class Interface {
                                             paciente = new Paciente(nome, cpf, endereco, telefone, nascimento);
 
                                             if (facadeNegocio.getGerenciadorPaciente().buscar(paciente) == null) {
-                                                facadeDados.getListaDePaciente().getPacientes().add(paciente);
+                                                facadeNegocio.getGerenciadorPaciente().addPaciente(paciente);
                                             }
                                         }
                                         case 2 -> {
@@ -435,11 +452,12 @@ public class Interface {
                                             System.out.println("CPF do paciente: ");
                                             cpf = in.nextLine();
                                             paciente = new Paciente(cpf);
+                                            paciente = facadeNegocio.getGerenciadorPaciente().buscar(paciente);
 
                                             if (facadeNegocio.getGerenciadorPaciente().buscar(paciente) == null)
                                                 System.out.println("Adicione o paciente antes de marcar uma consulta");
                                             else {
-                                                facadeDados.getFilaDeConsulta().getFilaConsulta().add(paciente);
+                                                facadeDados.getGerenciadorConsulta().addConsulta(paciente);
                                                 System.out.println("Adicionado na fila para consulta");
                                             }
                                         }
@@ -457,15 +475,15 @@ public class Interface {
                                                     opcao0 = in.nextInt();
                                                     if (opcao0 == Exames.RaioX.exame) {
                                                         exame = new Exame("Raio-X", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
-                                                        facadeDados.getFilaDeExame().getFilaExames().add(exame);
+                                                        facadeDados.getGerenciadorExame().addExame(exame);
                                                         System.out.println("Adicionado na fila para exames");
                                                     } else if (opcao0 == Exames.Sangue.exame) {
                                                         exame = new Exame("de sangue", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
-                                                        facadeDados.getFilaDeExame().getFilaExames().add(exame);
+                                                        facadeDados.getGerenciadorExame().addExame(exame);
                                                         System.out.println("Adicionado na fila para exames");
                                                     } else if (opcao0 == Exames.tomografia.exame) {
                                                         exame = new Exame("Tomografia", paciente.getNome(), paciente.getCpf(), paciente.getTelefone(), paciente.getEndereco(), paciente.getNasc());
-                                                        facadeDados.getFilaDeExame().getFilaExames().add(exame);
+                                                        facadeDados.getGerenciadorExame().addExame(exame);
                                                         System.out.println("Adicionado na fila para exames");
                                                     }
                                                 }
@@ -480,17 +498,17 @@ public class Interface {
                                                 System.out.println("Adicione o paciente antes de marcar um exame");
                                         }
                                         case 6 -> {
-                                            if (!facadeDados.getFilaDeConsulta().getFilaConsulta().isEmpty())
-                                                System.out.println(facadeDados.getFilaDeConsulta().getFilaConsulta().getFirst().getNome()+ " " +
-                                                        facadeDados.getFilaDeConsulta().getFilaConsulta().getFirst().getNasc());
+                                            if (!facadeDados.getGerenciadorConsulta().getFilaDeConsultas().getFilaConsulta().isEmpty())
+                                                System.out.println(facadeDados.getGerenciadorConsulta().getFilaDeConsultas().getFilaConsulta().getFirst().getNome()+ " " +
+                                                        facadeDados.getGerenciadorConsulta().getFilaDeConsultas().getFilaConsulta().getFirst().getNome());
                                             else
                                                 System.out.println("Lista de paciente para consulta esta vazia");
                                         }
                                         case 7 -> {
-                                            if (!facadeDados.getFilaDeExame().getFilaExames().isEmpty())
-                                                System.out.println(facadeDados.getFilaDeExame().getFilaExames().getFirst().getNome() + " " +
-                                                        facadeDados.getFilaDeExame().getFilaExames().getFirst().getNasc() + " " +
-                                                        facadeDados.getFilaDeExame().getFilaExames().getFirst().getTipo());
+                                            if (!facadeDados.getGerenciadorExame().getFilaDeExames().getFilaExames().isEmpty())
+                                                System.out.println(facadeDados.getGerenciadorExame().getFilaDeExames().getFilaExames().getFirst().getNome() + " " +
+                                                        facadeDados.getGerenciadorExame().getFilaDeExames().getFilaExames().getFirst().getNasc() + " " +
+                                                        facadeDados.getGerenciadorExame().getFilaDeExames().getFilaExames().getFirst().getTipo());
                                             else
                                                 System.out.println("Lista de paciente para exame esta vazia");
                                         }
@@ -498,7 +516,7 @@ public class Interface {
                                             facadeNegocio.getGerenciadorPaciente().exibirLista();
                                         case 9 ->{
                                             double hora, valor;
-                                            if (!facadeDados.getListaDeRecepcionista().getRecepcionistas().isEmpty()) {
+                                            if (!facadeDados.getGerenciadorRecepcionista().getRecepcionistas().getRecepcionistas().isEmpty()) {
                                                 recepcionista = new Recepcionista(matricula);
                                                 int x = facadeNegocio.getGerenciadorRecepcionista().buscarInt(recepcionista);
                                                 if (x != -1) {

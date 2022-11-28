@@ -8,7 +8,7 @@ public class GerenciadorPaciente {
     private ListaDePaciente pacientes;
 
     public GerenciadorPaciente() {
-
+        pacientes = new ListaDePaciente();
     }
 
     public GerenciadorPaciente(ListaDePaciente pacientes) {

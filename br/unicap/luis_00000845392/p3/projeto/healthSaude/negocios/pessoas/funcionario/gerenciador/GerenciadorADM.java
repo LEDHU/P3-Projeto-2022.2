@@ -3,13 +3,14 @@ package br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funci
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.dados.listas.ListaDeADM;
 import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcionario.abstrato.Funcionario;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class GerenciadorADM {
     private ListaDeADM adms;
 
     public GerenciadorADM() {
-
+        adms = new ListaDeADM();
     }
 
     public GerenciadorADM(ListaDeADM adms) {

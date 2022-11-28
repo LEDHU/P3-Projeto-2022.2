@@ -6,20 +6,20 @@ import br.unicap.luis_00000845392.p3.projeto.healthSaude.negocios.pessoas.funcio
 public class GerenciadorExame {
     private FilaDeExame filaDeExames;
 
-    public GerenciadorExame(FilaDeExame listaDeExames) {
-        this.filaDeExames = listaDeExames;
+    public GerenciadorExame(FilaDeExame filaDeExames) {
+        this.filaDeExames = filaDeExames;
     }
 
     public GerenciadorExame() {
-
+        filaDeExames = new FilaDeExame();
     }
 
-    public FilaDeExame getListaDeExames() {
+    public FilaDeExame getFilaDeExames() {
         return filaDeExames;
     }
 
-    public void setListaDeExames(FilaDeExame listaDeExames) {
-        this.filaDeExames = listaDeExames;
+    public void setFilaDeExames(FilaDeExame filaDeExames) {
+        this.filaDeExames = filaDeExames;
     }
 
     public void addExame(Exame e){

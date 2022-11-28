@@ -7,8 +7,12 @@ import java.util.ArrayList;
 public class ListaDeFuncionario {
     ArrayList<Funcionario> funcionarios;
 
+    public ListaDeFuncionario(ArrayList<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
     public ListaDeFuncionario() {
-        this.funcionarios = new ArrayList<>();
+        funcionarios = new ArrayList<>();
     }
 
     public ArrayList<Funcionario> getFuncionarios() {
@@ -17,6 +21,10 @@ public class ListaDeFuncionario {
 
     public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public void add(Funcionario f){
+        funcionarios.add(f);
     }
 
 }

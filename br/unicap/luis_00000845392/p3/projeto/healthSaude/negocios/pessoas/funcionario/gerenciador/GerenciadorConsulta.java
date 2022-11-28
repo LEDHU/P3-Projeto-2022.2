@@ -13,7 +13,7 @@ public class GerenciadorConsulta {
     }
 
     public GerenciadorConsulta() {
-
+        filaDeConsultas = new FilaDeConsulta();
     }
 
     public FilaDeConsulta getFilaDeConsultas() {

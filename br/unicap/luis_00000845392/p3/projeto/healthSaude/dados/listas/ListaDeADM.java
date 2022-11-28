@@ -8,7 +8,11 @@ public class ListaDeADM {
     private ArrayList<Funcionario> adms;
 
     public ListaDeADM() {
-        this.adms = new ArrayList<>();
+        adms = new ArrayList<>();
+    }
+
+    public ListaDeADM(ArrayList<Funcionario> adms) {
+        this.adms = adms;
     }
 
     public ArrayList<Funcionario> getAdms() {

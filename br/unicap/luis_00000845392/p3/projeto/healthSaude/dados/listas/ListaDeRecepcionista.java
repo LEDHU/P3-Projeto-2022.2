@@ -7,8 +7,12 @@ import java.util.ArrayList;
 public class ListaDeRecepcionista {
     private ArrayList<Funcionario> recepcionistas;
 
+    public ListaDeRecepcionista(ArrayList<Funcionario> recepcionistas) {
+        this.recepcionistas  = recepcionistas;
+    }
+
     public ListaDeRecepcionista() {
-        this.recepcionistas  = new ArrayList<>();;
+        recepcionistas = new ArrayList<>();
     }
 
     public ArrayList<Funcionario> getRecepcionistas() {

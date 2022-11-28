@@ -9,7 +9,7 @@ public class GerenciadorRecepcionista {
     private ListaDeRecepcionista recepcionistas;
 
     public GerenciadorRecepcionista() {
-
+        recepcionistas = new ListaDeRecepcionista();
     }
 
     public GerenciadorRecepcionista(ListaDeRecepcionista recepcionistas) {

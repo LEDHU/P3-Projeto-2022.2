@@ -8,7 +8,11 @@ public class ListaDeMedico {
     private ArrayList<Funcionario> medicos;
 
     public ListaDeMedico() {
-        this.medicos = new ArrayList<>();;
+        medicos = new ArrayList<>();
+    }
+
+    public ListaDeMedico(ArrayList<Funcionario> medicos) {
+        this.medicos = medicos;
     }
 
     public ArrayList<Funcionario> getMedicos() {

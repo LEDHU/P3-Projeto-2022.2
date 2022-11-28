@@ -11,6 +11,10 @@ public class FilaDeConsulta {
         this.filaConsulta = filaConsulta;
     }
 
+    public FilaDeConsulta() {
+        filaConsulta = new ArrayDeque<>();
+    }
+
     public ArrayDeque<Paciente> getFilaConsulta() {
         return filaConsulta;
     }

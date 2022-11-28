@@ -9,7 +9,7 @@ public class GerenciadorMedico {
     private ListaDeMedico medicos;
 
     public GerenciadorMedico() {
-
+        medicos = new ListaDeMedico();
     }
 
     public GerenciadorMedico(ListaDeMedico medicos) {
