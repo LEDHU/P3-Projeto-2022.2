@@ -6,7 +6,7 @@ Objetos:
 
 Medico, Recepcionista, Administração e Paciente
 
-Funcionalidades:
+Funcionalidades do objeto:
 
 Medico: pode realizar consulta e exames, visualiza o proximo a ser atendido da fila do exame e da consulta.
 
@@ -16,7 +16,7 @@ Administracao: adicionar, excluir e alterar funcionarios (Há um funcionario mas
 
 Paciente: é atendido para consulta e exame (classe sem funcionalidade).
 
-Passo a passo:
+Funcionamento do sistema:
 
 Primeiro menu, você escolhe quem você é: ADM, Medico, Recepcionista.
 
